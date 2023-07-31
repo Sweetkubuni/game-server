@@ -76,7 +76,7 @@ func (webRTC *WebRTC) Append(readChannel func(r io.Reader), writeChannel func(io
 
 		// Wait for the offer to be pasted
 		offer := webrtc.SessionDescription{}
-		signal.Decode(rawOffer, &offer)
+		Decode(rawOffer, &offer, false)
 
 		// Set the remote SessionDescription
 		err = peerConnection.SetRemoteDescription(offer)
@@ -105,10 +105,6 @@ func (webRTC *WebRTC) Append(readChannel func(r io.Reader), writeChannel func(io
 		<-gatherComplete
 
 		// Output the answer in base64 so we can paste it in browser
-		fmt.Println(signal.Encode(*peerConnection.LocalDescription()))
+		payload := Encode(*peerConnection.LocalDescription())
 	}()
-}
-
-func run() {
-
 }

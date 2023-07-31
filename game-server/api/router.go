@@ -2,6 +2,6 @@
 
 func newRouter() {
 	router := httprouter.New()
-	router.GET("/user", Index)
-	router.POST("/user", Index)
+	router.GET("/player", GetPlayer)
+	router.POST("/player", PostPlayer)
 }
