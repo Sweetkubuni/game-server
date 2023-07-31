@@ -1,4 +1,6 @@
-"github.com/julienschmidt/httprouter"
+package api
+
+import "github.com/julienschmidt/httprouter"
 
 func newRouter() {
 	router := httprouter.New()
