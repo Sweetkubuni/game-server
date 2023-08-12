@@ -1,14 +1,16 @@
+package main
 
+import (
+	"fmt"
+	"net/http"
+
+	"game-server/api"
+)
 
 func main() {
-	appCfg, err := config.GetConfig(*envPtr)
-	if err != nil {
-		log.Fatal().Err(err).Msg("could not get app config")
-	}
-	log.Info().Str("Address: currently running", appCfg.GetRedisConfig().Addr).Str("Password", appCfg.GetRedisConfig().Password).Str("Port", appCfg.GetPort()).Str("Username", appCfg.GetRedisConfig().Username).Msg("Configuration check")
-	rdb := redis.NewClient(&redis.Options{
-		Addr:     appCfg.GetRedisConfig().Addr,
-		Password: appCfg.GetRedisConfig().Password,
-		Username: appCfg.GetRedisConfig().Username,
-	})
+	router := api.NewRouter()
+
+	fmt.Println("Open index.html to access this demo")
+	// nolint: gosec
+	panic(http.ListenAndServe(":8080", router))
 }
